@@ -1,0 +1,16 @@
+﻿@page
+@model MyVersion.Pages.Restaurants.AddNewModel
+@{
+}
+
+<form method="post">
+    <input type="hidden" asp-for="Restaurant.Id" />
+    <label>Name</label>
+    <input type="text" asp-for="Restaurant.Name" />
+    <label>Location</label>
+    <input type="text" asp-for="Restaurant.Location" />
+    <label>Cuisine Type</label>
+    <select asp-for="Restaurant.Cuisine" asp-items="Model.Cuisines">
+    </select>
+    <button type="submit">Add</button">
+</form>

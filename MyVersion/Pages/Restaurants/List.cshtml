@@ -1,0 +1,89 @@
+@page
+@model ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>@Model.Message</h1>
+
+
+<form method="get">
+    <input type="search" name="searchTerm" id="searchTerm" asp-for="SearchTerm">
+    <button type="submit">Search</button>
+</form>
+
+<form method="get" asp-page="./AddNew">
+    <button type="submit">Add Restaurant</button>
+</form>
+
+<table class="table">
+    <tr>
+        <td>
+            ID
+        </td>
+        <td>
+            Restaurants
+        </td>
+        <td>
+            Type
+        </td>
+        <td>
+            Location
+        </td>
+        <td>
+            Details
+        </td>
+        <td>
+            Edit
+        </td>
+        <td>
+            Delete
+        </td>
+    </tr>
+    @{
+        if (Model.Restaurants != null)
+        {
+            foreach (var item in Model.Restaurants)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @*<a asp-page="./Detail" asp-route-RestaurantID="@item.Id">@item.Name</a>*@
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Cuisine
+                    </td>
+                    <td>
+                        @item.Location
+                    </td>
+                    <td>
+                        <a asp-page="./Detail"
+                           asp-route-RestaurantID="@item.Id">Details</a>
+                    </td>
+                    <td>
+                        <a asp-page="./Edit"
+                           asp-route-RestaurantID="@item.Id"
+                           asp-route-Delete="false">Edit</a>
+                    </td>
+
+
+                    <td>
+                        <form method="post">
+                            <button type="submit"
+                                    asp-route-RestaurantID="@item.Id"
+                                    asp-route-Delete="true">
+                                Delete
+                            </button>
+
+                        </form>
+                    </td>
+                </tr>
+
+            }
+        }
+    }
+</table>
+
